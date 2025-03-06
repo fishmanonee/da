@@ -9,14 +9,29 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $table = 'products';
     protected $fillable = [
-        'name', 'img', 'description', 'price', 'discount_price',
-        'status_id', 'category_id', 'type_id', 'created_at', 'updated_at'
+        'name',
+        'price',
+        'discount_price',
+        'img',
+        'quantity',
+        'category_id',
+        'description',
+        'type_id',
     ];
 
-    // Quan hệ với bảng types
+    public function category(){
+        return $this->belongsTo(Category::class,'category_id');
+    }
+
     public function type()
     {
         return $this->belongsTo(Type::class, 'type_id');
     }
+
+    public function product_variants() {
+        return $this->hasMany(ProductVariant::class);
+    }
+
 }
