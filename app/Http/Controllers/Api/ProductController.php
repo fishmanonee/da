@@ -19,7 +19,7 @@ class ProductController extends Controller
     {
         $products = Product::with(['type', 'variants'])->get([
             'id', 'name', 'img', 'description', 'price', 'discount_price',
-            'status_id', 'category_id', 'type_id', 'created_at', 'updated_at'
+             'category_id', 'type_id', 'created_at', 'updated_at'
         ]);
     
         return response()->json($products, 200, [], JSON_PRETTY_PRINT);
