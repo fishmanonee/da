@@ -9,15 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->foreignId('type_id')
-                ->constrained('types')
-                ->onDelete('cascade')
-                ->after('category_id'); // Thêm sau cột category_id
+            if (!Schema::hasColumn('products', 'type_id')) {
+                $table->unsignedBigInteger('type_id')->nullable();
+            }
         });
     }
+    
 
     /**
      * Reverse the migrations.

@@ -9,29 +9,19 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $table = 'products';
     protected $fillable = [
-        'name',
-        'price',
-        'discount_price',
-        'img',
-        'quantity',
-        'category_id',
-        'description',
-        'type_id',
+        'name', 'img', 'description', 'price', 'discount_price',
+        'status_id', 'category_id', 'type_id'
     ];
-
-    public function category(){
-        return $this->belongsTo(Category::class);
-    }
 
     public function type()
     {
         return $this->belongsTo(Type::class, 'type_id');
     }
 
-    public function product_variants() {
-        return $this->hasMany(ProductVariant::class);
+    public function variants()
+    {
+        return $this->hasMany(ProductVariant::class, 'product_id', 'id');
     }
     
 }
